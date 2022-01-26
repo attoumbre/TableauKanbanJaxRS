@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+
+
+	 <persistence-unit name="dev" transaction-type="RESOURCE_LOCAL">
+     <!-- <class>org.hibernate.ejb.test.Cat</class> -->
+     <!--  <class>org.hibernate.ejb.test.Distributor</class> -->
+     <!--  <class>org.hibernate.ejb.test.Item</class> -->
+      <properties> 
+         <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+                        <property name="hibernate.show_sql" value="true"/>
+            
+         <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
+         <property name="hibernate.connection.username" value="sa"/>
+         <property name="hibernate.connection.password" value=""/>
+         <property name="hibernate.connection.url" value="jdbc:hsqldb:hsql://localhost/"/>
+      </properties>
+   </persistence-unit>
+<persistence-unit name="prod" transaction-type="RESOURCE_LOCAL">
+     <!-- <class>org.hibernate.ejb.test.Cat</class> -->
+     <!--  <class>org.hibernate.ejb.test.Distributor</class> -->
+     <!--  <class>org.hibernate.ejb.test.Item</class> -->
+      <properties>
+         <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+	      <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+    	  <property name="toplink.target-database" value="HSQL"/>
+         <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+         <property name="hibernate.connection.username" value="sa"/>
+         <property name="hibernate.connection.password" value=""/>
+         <property name="hibernate.connection.url" value="jdbc:hsqldb:hsql://localhost/"/>
+         <property name="hibernate.max_fetch_depth" value="3"/>
+       
+         <!-- cache configuration -->
+         <!-- <property name="hibernate.ejb.classcache.org.hibernate.ejb.test.Item" value="read-write"/>-->
+         <!-- <property name="hibernate.ejb.collectioncache.org.hibernate.ejb.test.Item.distributors" value="read-write, RegionName"/>-->
+
+         <!-- alternatively to <class> and <property> declarations, you can use a regular hibernate.cfg.xml file -->
+         <!-- property name="hibernate.ejb.cfgfile" value="/org/hibernate/ejb/test/hibernate.cfg.xml"/ -->
+      </properties>
+   </persistence-unit>
+
+ <persistence-unit name="mysql">
+        <properties>
+            <!--
+            <property name="hibernate.ejb.cfgfile" value="/hibernate.cfg.xml"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.archive.autodetection" value="class, hbm"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost/sirtp?useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <property name="hibernate.c3p0.min_size" value="5"/>
+            <property name="hibernate.c3p0.max_size" value="20"/>
+            <property name="hibernate.c3p0.timeout" value="300"/>
+            <property name="hibernate.c3p0.max_statements" value="50"/>
+            <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
