@@ -40,21 +40,21 @@ public class Tableau implements Serializable{
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
+	@OneToMany(mappedBy = "tableau")
+	public List<Sections> getSections() {
+		return sections;
+	}
+	public void setSections(List<Sections> sections) {
+		this.sections = sections;
+	}
 	@ManyToOne
 	public Users getUser() {
 		return user;
 	}
+	public void setUser(Users userid) {
+		this.user = userid;
+	}
 	
-	public void setUser(Users user) {
-		this.user = user;
-	}
-	@OneToMany(mappedBy = "tableau")
-	public List<Sections> getSection() {
-		return sections;
-	}
-	public void setSection(List<Sections> sections) {
-		this.sections = sections;
-	}
+	
 	
 }
