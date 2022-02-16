@@ -49,12 +49,12 @@
             <property name="hibernate.ejb.cfgfile" value="/hibernate.cfg.xml"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
             -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.archive.autodetection" value="class, hbm"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
             <property name="hibernate.connection.password" value=""/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost/sirtp?useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost/kanban?useSSL=false&amp;serverTimezone=UTC"/>
             <property name="hibernate.connection.username" value="root"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="hibernate.c3p0.min_size" value="5"/>

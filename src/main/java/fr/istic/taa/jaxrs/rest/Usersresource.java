@@ -3,6 +3,7 @@ package fr.istic.taa.jaxrs.rest;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -20,6 +21,7 @@ import fr.istic.taa.jaxrs.dto.UserDto;
 public class Usersresource {
 	
 	private UsersDao usersDao = new UsersDao();
+	
 	@GET
 	@Path("/{user}")
 	public Users getUserById(@PathParam("userId") Long userId) {
@@ -30,6 +32,11 @@ public class Usersresource {
 		return usersDao.findOne(userId);
 	}
 	
+	@DELETE
+	@Path("/{user}")
+	public void deleteUser(@PathParam("userId") Long userId) {
+	  usersDao.deleteById(userId);
+	}
 	@GET
 	@Path("/all")
 	public List<Users> getAllUsers() {
