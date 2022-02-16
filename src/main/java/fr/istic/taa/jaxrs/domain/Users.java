@@ -15,6 +15,7 @@ public class Users implements Serializable {
 	private String nom;
 	private String prenom;
 	private String mail;
+	private List<Tableau> tableau;
 	private List<Fiches> fiches;
 	
 //	public Users() {
@@ -59,6 +60,15 @@ public class Users implements Serializable {
 	}
 	public void setFiches(List<Fiches> fiches) {
 		this.fiches = fiches;
+	}
+	
+	@OneToMany(mappedBy = "user")
+	public List<Tableau> gettableau(){
+		return tableau;
+	}
+	
+	public void setTableau(List<Tableau> tableau) {
+		this.tableau = tableau;
 	}
 
 	@Override
