@@ -37,6 +37,7 @@ public class Usersresource {
 	public void deleteUser(@PathParam("userId") Long userId) {
 	  usersDao.deleteById(userId);
 	}
+	
 	@GET
 	@Path("/all")
 	public List<Users> getAllUsers() {
