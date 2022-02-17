@@ -2,7 +2,6 @@ package fr.istic.taa.jaxrs.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Entity;

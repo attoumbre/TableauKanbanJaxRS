@@ -21,7 +21,13 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import fr.istic.taa.jaxrs.rest.FicheGitResource;
+import fr.istic.taa.jaxrs.rest.FicheResource;
+import fr.istic.taa.jaxrs.rest.FichebugResource;
+import fr.istic.taa.jaxrs.rest.SectionsResource;
 import fr.istic.taa.jaxrs.rest.SwaggerResource;
+import fr.istic.taa.jaxrs.rest.TableauResource;
+import fr.istic.taa.jaxrs.rest.TagsResource;
 import fr.istic.taa.jaxrs.rest.Usersresource;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 
@@ -36,7 +42,12 @@ public class TestApplication extends Application {
         clazzes.add(Usersresource.class);
         clazzes.add(OpenApiResource.class);
         clazzes.add(SwaggerResource.class);
-        
+        clazzes.add(FicheResource.class);
+        clazzes.add(FicheGitResource.class);
+        clazzes.add(FichebugResource.class);
+        clazzes.add(SectionsResource.class);
+        clazzes.add(TableauResource.class);
+        clazzes.add(TagsResource.class);
 
         return clazzes;
     }
