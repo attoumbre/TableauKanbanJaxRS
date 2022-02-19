@@ -7,5 +7,6 @@ public class FichesBugDao extends AbstractJpaDao<Long, FichesBug>{
 	public FichesBugDao() {
 		super(FichesBug.class);
 	}
+	
 
 }

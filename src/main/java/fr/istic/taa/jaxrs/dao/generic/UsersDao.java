@@ -11,10 +11,7 @@ public class UsersDao extends AbstractJpaDao<Long, Users>{
 		super(Users.class);
 	}
 	
-	public List<Users> getAllUsers(){
-		String query = "select u from Users as u";
-		return EntityManagerHelper.getEntityManager().createQuery(query, Users.class).getResultList();
-	}
+	
 
 	//recupperer tout un users avec son tableau de bord
 	public List<UserDto> findUserTableauFiche(int userId) {
