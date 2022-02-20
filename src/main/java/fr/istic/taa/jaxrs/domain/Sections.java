@@ -1,13 +1,19 @@
 package fr.istic.taa.jaxrs.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Sections implements Serializable{
@@ -15,7 +21,7 @@ public class Sections implements Serializable{
 	private Long id;
 	private Tableau tableau;
 	private String lib;
-	private List<Fiches> fiches;
+	private List<Fiches> fiches  = new ArrayList<Fiches> ();
 	
 //	public Sections() {
 //		
@@ -34,7 +40,8 @@ public class Sections implements Serializable{
 		this.id = id;
 	}
 	
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JsonBackReference
 	public Tableau getTableau() {
 		return tableau;
 	}
@@ -48,7 +55,8 @@ public class Sections implements Serializable{
 		this.lib = lib;
 	}
 	
-	@OneToMany(mappedBy = "section")
+	@OneToMany(mappedBy = "section", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	 @JsonManagedReference
 	public List<Fiches> getFiches() {
 		return fiches;
 	}

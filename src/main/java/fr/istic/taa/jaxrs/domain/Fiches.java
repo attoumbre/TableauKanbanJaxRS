@@ -2,9 +2,12 @@ package fr.istic.taa.jaxrs.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -12,17 +15,20 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Fiches implements Serializable{
 
 	private Long id;
-	private String lib;
 	private Date date;
-	private int temps;
-	private List<Tags> tags;
-	private String lieu;
 	private String url;
+	private int temps;
+	private List<Tags> tags  = new ArrayList<Tags> ();
+	private String lieu;
 	private String description;
 	private Users user;
 	private Sections section;
@@ -50,17 +56,18 @@ public class Fiches implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getLib() {
-		return lib;
-	}
-	public void setLib(String lib) {
-		this.lib = lib;
-	}
+	
 	public Date getDate() {
 		return date;
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	public int getTemps() {
 		return temps;
@@ -69,7 +76,8 @@ public class Fiches implements Serializable{
 		this.temps = temps;
 	}
 	
-	@OneToMany(mappedBy = "fiche")
+	@OneToMany(mappedBy = "fiche" , fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	 @JsonManagedReference
 	public List<Tags> getTags() {
 		return tags;
 	}
@@ -83,19 +91,15 @@ public class Fiches implements Serializable{
 	public void setLieu(String lieu) {
 		this.lieu = lieu;
 	}
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
+	
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JsonBackReference
 	public Users getUser() {
 		return user;
 	}
@@ -103,7 +107,8 @@ public class Fiches implements Serializable{
 	public void setUser(Users user) {
 		this.user = user;
 	}
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JsonBackReference
 	public Sections getSection() {
 		return section;
 	}
