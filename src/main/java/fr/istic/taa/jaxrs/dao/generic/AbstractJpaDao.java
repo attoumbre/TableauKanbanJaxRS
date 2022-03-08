@@ -18,9 +18,9 @@ public abstract class AbstractJpaDao<K, T extends Serializable> implements IGene
 		this.entityManager = EntityManagerHelper.getEntityManager();
 		this.clazz = clazzToSet;
 	}
-	public AbstractJpaDao() {
+	/*public AbstractJpaDao() {
 		this.entityManager = EntityManagerHelper.getEntityManager();
-	}
+	}*/
 
 	public void setClazz(Class<T> clazzToSet) {
 		this.clazz = clazzToSet;

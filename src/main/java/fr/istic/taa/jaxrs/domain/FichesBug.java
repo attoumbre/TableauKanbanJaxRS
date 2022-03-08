@@ -9,14 +9,10 @@ public class FichesBug extends Fiches{
 		super(lib, temps, lieu, url, description, section);
 		// TODO Auto-generated constructor stub
 	}*/
-	private String url;
+	
 	private String nomService;
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
+	
+	
 	public String getNomService() {
 		return nomService;
 	}
