@@ -5,17 +5,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+
 public class Tableau implements Serializable{
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String nom;
 	private List<Sections> sections  = new ArrayList<Sections> ();
@@ -41,8 +50,8 @@ public class Tableau implements Serializable{
 		this.nom = nom;
 	}
 	
-	@OneToMany(mappedBy = "tableau", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	 @JsonManagedReference
+	@OneToMany(mappedBy = "tableau", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	 @JsonManagedReference(value = "tableau")
 	public List<Sections> getSection() {
 		return sections;
 	}

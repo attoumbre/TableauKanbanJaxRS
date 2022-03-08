@@ -33,6 +33,8 @@ public class Usersresource {
 		return this.usersDao.findOne(id);
 	}
 	
+	
+	
 	@DELETE
 	@Path("/{user}")
 	public void deleteUser(@PathParam("user") Long id) {

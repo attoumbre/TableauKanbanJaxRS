@@ -6,23 +6,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Fiches implements Serializable{
+	
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private Date date;
 	private String url;
@@ -76,8 +86,8 @@ public class Fiches implements Serializable{
 		this.temps = temps;
 	}
 	
-	@OneToMany(mappedBy = "fiche" , fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	 @JsonManagedReference
+	@OneToMany(mappedBy = "fiche" , fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	 @JsonManagedReference(value = "fiche")
 	public List<Tags> getTags() {
 		return tags;
 	}
@@ -98,8 +108,8 @@ public class Fiches implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	@ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JsonBackReference
+	@ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JsonBackReference (value = "user")
 	public Users getUser() {
 		return user;
 	}
@@ -107,8 +117,8 @@ public class Fiches implements Serializable{
 	public void setUser(Users user) {
 		this.user = user;
 	}
-	@ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JsonBackReference
+	@ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JsonBackReference(value = "section")
 	public Sections getSection() {
 		return section;
 	}
