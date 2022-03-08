@@ -1,21 +1,37 @@
 package fr.istic.taa.jaxrs.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-@Entity
-public class Sections implements Serializable{
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@Entity
+
+public class Sections implements Serializable{
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private Tableau tableau;
 	private String lib;
-	private List<Fiches> fiches;
+	private List<Fiches> fiches  = new ArrayList<Fiches> ();
 	
 //	public Sections() {
 //		
@@ -34,7 +50,8 @@ public class Sections implements Serializable{
 		this.id = id;
 	}
 	
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JsonBackReference(value = "tableau")
 	public Tableau getTableau() {
 		return tableau;
 	}
@@ -48,7 +65,8 @@ public class Sections implements Serializable{
 		this.lib = lib;
 	}
 	
-	@OneToMany(mappedBy = "section")
+	@OneToMany(mappedBy = "section", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	 @JsonManagedReference(value = "section")
 	public List<Fiches> getFiches() {
 		return fiches;
 	}
