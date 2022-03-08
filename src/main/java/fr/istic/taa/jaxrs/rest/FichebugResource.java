@@ -33,6 +33,7 @@ public class FichebugResource {
 		@DELETE
 		@Path("/{f}")
 		public void deleteFicheBug(@PathParam("f") Long f) {
+			
 			this.dao.deleteById(f);
 		}
 		
@@ -56,7 +57,9 @@ public class FichebugResource {
 		@PUT
 		  @Consumes("application/json")
 		  public Response UpdateUser ( FichesBug f) {
-			  
+			if(f == null) {
+				throw new IllegalArgumentException("la fiche est nulle");
+			}
 			  this.dao.update(f);
 		    
 		    return Response.ok().entity("SUCCESS").build();

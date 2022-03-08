@@ -61,7 +61,9 @@ public class Usersresource {
 	 @PUT
 	  @Consumes("application/json")
 	  public Response UpdateUser ( Users u) {
-		  
+		 if(u == null) {
+			 throw new IllegalArgumentException("l'utilisateur est null");
+		 }
 		  this.usersDao.update(u);
 	    
 	    return Response.ok().entity("SUCCESS").build();

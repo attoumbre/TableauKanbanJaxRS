@@ -60,7 +60,9 @@ public class TagsResource {
 				 @PUT
 				  @Consumes("application/json")
 				  public Response UpdateUser ( Tags t) {
-					  
+					 if(t == null) {
+							throw new IllegalArgumentException(" Aucun tableau a ajoute");
+						}
 					  this.dao.update(t);
 				    
 				    return Response.ok().entity("SUCCESS").build();

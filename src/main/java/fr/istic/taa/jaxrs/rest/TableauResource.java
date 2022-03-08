@@ -58,7 +58,9 @@ public class TableauResource {
 				@PUT
 				  @Consumes("application/json")
 				  public Response UpdateUser ( Tableau t) {
-					  
+					if(t == null) {
+						throw new IllegalArgumentException(" Aucun tableau a ajoute");
+					}
 					  this.dao.update(t);
 				    
 				    return Response.ok().entity("SUCCESS").build();

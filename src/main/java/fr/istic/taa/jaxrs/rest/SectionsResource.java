@@ -60,7 +60,9 @@ public class SectionsResource {
 				@PUT
 				@Consumes("application/json")
 				  public Response UpdateUser ( Sections s) {
-					  
+					if(s == null) {
+						throw new IllegalArgumentException("la section est nulle");
+					}
 					  this.dao.update(s);
 				    
 				    return Response.ok().entity("SUCCESS").build();

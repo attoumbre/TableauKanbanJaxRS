@@ -59,7 +59,9 @@ public class FicheResource {
 			@PUT
 			  @Consumes("application/json")
 			  public Response UpdateUser ( Fiches f) {
-				  
+				if(f == null) {
+					throw new IllegalArgumentException("la fiche est nulle");
+				}
 				  this.dao.update(f);
 			    
 			    return Response.ok().entity("SUCCESS").build();
