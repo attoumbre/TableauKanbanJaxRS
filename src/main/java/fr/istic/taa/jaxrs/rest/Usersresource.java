@@ -73,14 +73,17 @@ public class Usersresource {
 	  
 	
 	@POST
-	@Path("/login")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/signin/{mail}/{nom}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public UserDto login(String nom, String prenom) {
-		Users u = this.usersDao.login(nom, prenom);
+	public UserDto login(@PathParam("nom") String nom,@PathParam("mail") String mail ) {
+		List<Users> u = this.usersDao.login(nom, mail);
 		UserDto userDto = new UserDto();
-		userDto.setNom(u.getNom());
-		userDto.setPrenom(u.getPrenom());
+		for (Users users : u) {
+				userDto.setNom(users.getNom());
+				userDto.setMail(users.getMail());
+		
+		}
+		
 		return userDto;
 	}
 	
