@@ -93,14 +93,42 @@ http://localhost:8080/fiches
 {
     "date" : "2022-01-01",
      "lieu" : "rennes",
+     "section": {
+          "id": 5
+           },
+      "user": {
+          "id": 8
+           }
+}
+
+
+*ajout d'une fiche Git
+POST
+http://localhost:8080/fichegit
+
+{
+    "date" : "2019-09-27",
+     "lieu" : "rennes",
+     "lib": "paire",
+     "section": {
+          "id": 6
+           },
       "user": {
           "id": 2
            }
 }
 
-*ajout d'un tableau
+
+
+*affichage d'un tableau
 GET
-http://localhost:8080/tableau/all
+http://localhost:8080/tableau/15
+
+
+
+*affichage de toutes les sections
+GET
+http://localhost:8080/sections/all
 
 
 
@@ -109,9 +137,11 @@ DELETE
 http://localhost:8080/fiches/12
 
 
+
 *suppression d'une utilisateur
 DELETE
 http://localhost:8080/user/1
+
 
 
 *modification d'un utilisateur
@@ -119,6 +149,18 @@ PUT
 http://localhost:8080/user
 {  "id" : 1,
     "prenom" : "fabrice"}
+
+
+
+*modification d'une fiche
+PUT
+http://localhost:8080/fiches
+{  "id" : 4,
+    "section": {
+          "id": 3
+           }
+}
+
 
 
 *affichage d'un utilisateur
