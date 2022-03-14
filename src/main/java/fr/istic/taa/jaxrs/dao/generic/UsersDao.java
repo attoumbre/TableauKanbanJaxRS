@@ -30,11 +30,11 @@ public class UsersDao extends AbstractJpaDao<Long, Users>{
 			.setParameter("userid", userId).getResultList();
 	}
 
-	public List<Users> login(String nom, String mail) {
+	public Users login(String nom, String mail) {
 		String query = "select u from Users as u " + 
-				"where u.nom = :nom and u.mail = :mail ";
+				"where u.nom = :nom and u.mail = :mail";
 		return  EntityManagerHelper.getEntityManager().createQuery(query, Users.class)
-			.setParameter("nom", nom).setParameter("mail", mail).getResultList();
+			.setParameter("nom", nom).setParameter("mail", mail).getResultList().get(0);
 		
 	//		String query = "select t from Magazine as t " + 
 	//				"where t.titre = :titre and t.prix = :prix";

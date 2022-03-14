@@ -13,15 +13,22 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+
 import fr.istic.taa.jaxrs.dao.generic.UsersDao;
 import fr.istic.taa.jaxrs.domain.Users;
 import fr.istic.taa.jaxrs.dto.UserDto;
 
+
+
 @Path("/user")
+//@CrossOriginResourceSharing(alloworigins = "*")
 @Produces({"application/json", "application/xml"})
 public class Usersresource {
 	
 	private UsersDao usersDao = new UsersDao();
+	
+	
 	
 	@GET
 	@Path("/{user}")
@@ -71,20 +78,24 @@ public class Usersresource {
 	    return Response.ok().entity("SUCCESS").build();
 	  }
 	  
-	
+	 @CrossOriginResourceSharing(
+				allowAllOrigins = true
+		        )
 	@POST
-	@Path("/signin/{mail}/{nom}")
+	//@Path("/signin/{mail}/{nom}")
+	@Path("/signin")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public UserDto login(@PathParam("nom") String nom,@PathParam("mail") String mail ) {
-		List<Users> u = this.usersDao.login(nom, mail);
+	//public UserDto login(@PathParam("nom") String nom,@PathParam("mail") String mail ) {
+	public UserDto signin(UserDto us) {
+		Users user = this.usersDao.login(us.getNom(), us.getMail());
 		UserDto userDto = new UserDto();
-		for (Users users : u) {
-				userDto.setNom(users.getNom());
-				userDto.setMail(users.getMail());
+		if(user != null) {
+			userDto.setNom(user.getNom());
+			userDto.setMail(user.getMail());
+			return userDto;
+		}				
 		
-		}
-		
-		return userDto;
+		throw new NullPointerException(); 
 	}
 	
 }

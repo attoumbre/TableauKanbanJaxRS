@@ -18,7 +18,7 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-
+		
 		<!-- ==== JPA / Hibernate ==== -->
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
 		<dependency>
@@ -86,6 +86,11 @@
 			<groupId>io.swagger.core.v3</groupId>
 			<artifactId>swagger-jaxrs2-servlet-initializer-v2</artifactId>
 			<version>2.1.4</version>
+		</dependency>
+		<dependency>
+		<groupId>org.apache.cxf</groupId>
+		<artifactId>cxf-rt-rs-security-cors</artifactId>
+		<version>2.6.1</version>
 		</dependency>
 	</dependencies>
 	<build>
