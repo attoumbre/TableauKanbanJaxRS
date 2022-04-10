@@ -10,8 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -28,6 +30,7 @@ public class Tableau implements Serializable{
 	private Long id;
 	private String nom;
 	private List<Sections> sections  = new ArrayList<Sections> ();
+	private Users userT;
 	
 //	public Tableau(String nom) {
 //		this.nom = nom;
@@ -51,12 +54,22 @@ public class Tableau implements Serializable{
 	}
 	
 	@OneToMany(mappedBy = "tableau", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	 @JsonManagedReference(value = "tableau")
+	@JsonManagedReference(value = "tableau")
 	public List<Sections> getSection() {
 		return sections;
 	}
 	public void setSection(List<Sections> sections) {
 		this.sections = sections;
+	}
+	
+	@ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JsonBackReference (value = "userT")
+	public Users getUserT() {
+		return userT;
+	}
+	
+	public void setUserT(Users user) {
+		this.userT = user;
 	}
 	
 }

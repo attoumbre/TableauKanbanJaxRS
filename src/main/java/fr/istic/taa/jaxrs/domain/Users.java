@@ -12,6 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -29,6 +32,7 @@ public class Users implements Serializable {
 	private String prenom;
 	private String mail;
 	private List<Fiches> fiches  = new ArrayList<Fiches> ();
+	private List<Tableau> tableau  = new ArrayList<Tableau> ();
 	
 //	public Users() {
 //		
@@ -66,7 +70,8 @@ public class Users implements Serializable {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "user")
 	@JsonManagedReference(value = "user")
 	public List<Fiches> getFiches() {
 		return fiches;
@@ -74,7 +79,15 @@ public class Users implements Serializable {
 	public void setFiches(List<Fiches> fiches) {
 		this.fiches = fiches;
 	}
-
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "userT")
+	@JsonManagedReference(value = "userT")
+	public List<Tableau> getTableau() {
+		return tableau;
+	}
+	public void setTableau(List<Tableau> tableau) {
+		this.tableau = tableau;
+	}
 	@Override
 	public String toString() {
 		return "Users [id=" + id + ", nom=" + nom + ", Prenom=" + prenom + ", mail=" + mail + ", fiches=" + fiches
