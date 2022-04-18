@@ -32,7 +32,7 @@ public class UsersDao extends AbstractJpaDao<Long, Users>{
 
 	public Users login(String nom, String mail) {
 		String query = "select u from Users as u " + 
-				"where u.nom = :nom and u.mail = :mail";
+				"where u.nom = :nom and u.email = :mail";
 		return  EntityManagerHelper.getEntityManager().createQuery(query, Users.class)
 			.setParameter("nom", nom).setParameter("mail", mail).getResultList().get(0);
 		

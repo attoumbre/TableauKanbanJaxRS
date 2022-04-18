@@ -19,8 +19,6 @@ import fr.istic.taa.jaxrs.dao.generic.UsersDao;
 import fr.istic.taa.jaxrs.domain.Users;
 import fr.istic.taa.jaxrs.dto.UserDto;
 
-
-
 @Path("/user")
 //@CrossOriginResourceSharing(alloworigins = "*")
 @Produces({"application/json", "application/xml"})
@@ -57,7 +55,8 @@ public class Usersresource {
 	}
 
 	@POST
-	@Consumes("application/json")
+	@Path("/signup")
+	@Consumes(MediaType.APPLICATION_JSON)
 	public void AddUser(Users user) {
 		
 		if(user == null) {
@@ -78,20 +77,17 @@ public class Usersresource {
 	    return Response.ok().entity("SUCCESS").build();
 	  }
 	  
-	 @CrossOriginResourceSharing(
-				allowAllOrigins = true
-		        )
+	
 	@POST
-	//@Path("/signin/{mail}/{nom}")
 	@Path("/signin")
 	@Consumes(MediaType.APPLICATION_JSON)
-	//public UserDto login(@PathParam("nom") String nom,@PathParam("mail") String mail ) {
 	public UserDto signin(UserDto us) {
-		Users user = this.usersDao.login(us.getNom(), us.getMail());
+		Users user = this.usersDao.login(us.getNom(), us.getEmail());
 		UserDto userDto = new UserDto();
 		if(user != null) {
+			userDto.setId(user.getId());
 			userDto.setNom(user.getNom());
-			userDto.setMail(user.getMail());
+			userDto.setEmail(user.getEmail());
 			return userDto;
 		}				
 		

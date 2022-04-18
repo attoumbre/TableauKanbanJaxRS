@@ -27,7 +27,7 @@ public class Users implements Serializable {
 	private Long id ;
 	private String nom;
 	private String prenom;
-	private String mail;
+	private String email;
 	private List<Fiches> fiches  = new ArrayList<Fiches> ();
 	
 //	public Users() {
@@ -60,11 +60,12 @@ public class Users implements Serializable {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public String getMail() {
-		return mail;
+	
+	public String getEmail() {
+		return email;
 	}
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JsonManagedReference(value = "user")
@@ -77,7 +78,7 @@ public class Users implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", nom=" + nom + ", Prenom=" + prenom + ", mail=" + mail + ", fiches=" + fiches
+		return "Users [id=" + id + ", nom=" + nom + ", Prenom=" + prenom + ", mail=" + email + ", fiches=" + fiches
 				+ "]";
 	}
 	

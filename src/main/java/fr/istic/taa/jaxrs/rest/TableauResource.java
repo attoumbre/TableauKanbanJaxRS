@@ -44,7 +44,8 @@ public class TableauResource {
 
 					return this.dao.findAll();
 				}
-
+				
+				@Path("/create")
 				@POST
 				@Consumes("application/json")
 				public void AddTab(Tableau t) {

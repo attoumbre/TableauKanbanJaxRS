@@ -1,9 +1,18 @@
 package fr.istic.taa.jaxrs.dto;
 
 public class UserDto {
+	private Long id;
 	private String nom;
-	private String mail;
+	private String email;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getNom() {
 		return nom;
 	}
@@ -12,13 +21,15 @@ public class UserDto {
 		this.nom = nom;
 	}
 
-	public String getMail() {
-		return mail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+
+	
 	
 
 }
