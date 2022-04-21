@@ -16,6 +16,8 @@ import javax.ws.rs.core.Response;
 import fr.istic.taa.jaxrs.dao.generic.TableauDao;
 import fr.istic.taa.jaxrs.domain.Tableau;
 import fr.istic.taa.jaxrs.domain.Tags;
+import fr.istic.taa.jaxrs.domain.Users;
+import fr.istic.taa.jaxrs.dto.UserDto;
 
 
 @Path("/tableau")
@@ -67,4 +69,15 @@ public class TableauResource {
 				    
 				    return Response.ok().entity("SUCCESS").build();
 				  }
+				
+				@POST
+				@Path("/perso/{i}")
+				@Produces(MediaType.APPLICATION_JSON)
+				@Consumes(MediaType.APPLICATION_JSON)
+				public List<Tableau> getTabByUser (@PathParam("i") Long i) {
+					
+					return this.dao.findTabByUser(i);
+					
+				}
+				
 }
