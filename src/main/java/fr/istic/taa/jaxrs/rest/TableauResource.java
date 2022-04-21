@@ -71,10 +71,10 @@ public class TableauResource {
 				  }
 				
 				@POST
-				@Path("/perso/{i}")
+				@Path("/perso")
 				@Produces(MediaType.APPLICATION_JSON)
 				@Consumes(MediaType.APPLICATION_JSON)
-				public List<Tableau> getTabByUser (@PathParam("i") Long i) {
+				public List<Tableau> getTabByUser ( Long i) {
 					
 					return this.dao.findTabByUser(i);
 					
