@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -15,9 +16,7 @@ import javax.ws.rs.core.Response;
 
 import fr.istic.taa.jaxrs.dao.generic.TableauDao;
 import fr.istic.taa.jaxrs.domain.Tableau;
-import fr.istic.taa.jaxrs.domain.Tags;
-import fr.istic.taa.jaxrs.domain.Users;
-import fr.istic.taa.jaxrs.dto.UserDto;
+import fr.istic.taa.jaxrs.dto.TableauDto;
 
 
 @Path("/tableau")
@@ -72,12 +71,22 @@ public class TableauResource {
 				
 				@POST
 				@Path("/perso")
-				@Produces(MediaType.APPLICATION_JSON)
 				@Consumes(MediaType.APPLICATION_JSON)
-				public List<Tableau> getTabByUser ( Long i) {
+				public List<TableauDto> getTabByUser (TableauDto tabledto) {
+					List<Tableau> tab= this.dao.findTabByUser(tabledto.getIdUser());
+					if(tab == null) {
+						throw new NullPointerException(" Aucun tableau trouvé");
+					}
 					
-					return this.dao.findTabByUser(i);
-					
+					List<TableauDto> tabDto = new ArrayList<TableauDto>();
+					for (Tableau tableau : tab) {
+						TableauDto table = new TableauDto();
+						table.setId(tableau.getId());
+						table.setNom(tableau.getNom());
+						table.setIdUser(tabledto.getIdUser());
+						tabDto.add(table);
+					}
+					return tabDto;
 				}
 				
 }
