@@ -50,12 +50,12 @@ public class TableauResource {
 				@Path("/create")
 				@POST
 				@Consumes(MediaType.APPLICATION_JSON)
-				public void AddTab(Tableau t) {
+				public Tableau AddTab(Tableau t) {
 					
 					if(t == null) {
 						throw new IllegalArgumentException(" Aucun tableau a ajoute");
 					}
-					this.dao.save(t);
+					return this.dao.save(t);
 				}
 
 				@PUT

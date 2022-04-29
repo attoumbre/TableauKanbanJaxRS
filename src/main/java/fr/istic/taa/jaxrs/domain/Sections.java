@@ -58,6 +58,7 @@ public class Sections implements Serializable{
 	public void setTableau(Tableau tableau) {
 		this.tableau = tableau;
 	}
+	@Column(name = "name")
 	public String getLib() {
 		return lib;
 	}

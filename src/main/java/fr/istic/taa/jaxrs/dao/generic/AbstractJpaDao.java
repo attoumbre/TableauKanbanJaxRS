@@ -34,12 +34,12 @@ public abstract class AbstractJpaDao<K, T extends Serializable> implements IGene
 		return entityManager.createQuery("select e from " + clazz.getName() + " as e",clazz).getResultList();
 	}
 
-	public void save(T entity) {
+	public T save(T entity) {
 		EntityTransaction t = this.entityManager.getTransaction();
 		t.begin();
 		entityManager.persist(entity);
 		t.commit();
-
+		return entity;
 	}
 
 	public T update(final T entity) {

@@ -9,7 +9,7 @@ public interface IGenericDao<K, T extends Serializable> {
  
    List<T> findAll();
   
-   void save(final T entity);
+   T save(final T entity);
  
    T update(final T entity);
  

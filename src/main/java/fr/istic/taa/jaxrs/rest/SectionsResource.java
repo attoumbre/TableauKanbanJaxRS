@@ -35,7 +35,7 @@ public class SectionsResource {
 				}
 				
 				@DELETE
-				@Path("/{s}")
+				@Path("delete/{s}")
 				public void deleteSection(@PathParam("s") Long s) {
 					this.dao.deleteById(s);
 				}
@@ -47,6 +47,7 @@ public class SectionsResource {
 					return this.dao.findAll();
 				}
 
+				@Path("/create")
 				@POST
 				@Consumes("application/json")
 				public void AddSection(Sections s) {
