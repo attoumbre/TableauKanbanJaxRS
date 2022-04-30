@@ -33,6 +33,15 @@ public class FicheResource {
 				return this.dao.findOne(f);
 			}
 			
+			@GET
+			@Path("/recup/{f}")
+			public List<Fiches> getFichesSection(@PathParam("f") Long f) {
+				if(f == null) {
+					throw new IllegalArgumentException("l'id de la fiche ne peut pas etre null");
+				}
+				return this.dao.getFicheSection(f);
+			}
+			
 			@DELETE
 			@Path("/{f}")
 			public void deleteFiche(@PathParam("f") Long f) {
@@ -47,23 +56,33 @@ public class FicheResource {
 			}
 
 			@POST
+			@Path("/create")
 			@Consumes("application/json")
-			public void AddFiche(Fiches f) {
+			public Fiches AddFiche(Fiches f) {
 				
 				if(f == null) {
 					throw new IllegalArgumentException("la fiche est nulle");
 				}
-				this.dao.save(f);
+				return this.dao.save(f);
 			}
 			
 			@PUT
 			  @Consumes("application/json")
-			  public Response UpdateUser ( Fiches f) {
+			  public Fiches UpdateUser ( Fiches f) {
 				if(f == null) {
 					throw new IllegalArgumentException("la fiche est nulle");
 				}
-				  this.dao.update(f);
-			    
-			    return Response.ok().entity("SUCCESS").build();
+				 Fiches fiches = new Fiches() ;
+				 fiches = this.dao.findOne(f.getId());
+				 if(fiches != null) {
+					 f.setDate(fiches.getDate());
+					 f.setDescription(fiches.getDescription());
+					 f.setSection(fiches.getSection());
+					 f.setTemps(fiches.getTemps());
+					 f.setUser(fiches.getUser());
+					 return this.dao.update(f);
+				 }
+			    return f;
+
 			  }
 }

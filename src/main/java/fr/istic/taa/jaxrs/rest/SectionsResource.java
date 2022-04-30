@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -34,6 +35,17 @@ public class SectionsResource {
 					return this.dao.findOne(s);
 				}
 				
+				@GET
+				@Path("/recup/{s}")
+				public List<Sections> getSectionLieBoard(@PathParam("s") Long s) {
+					List<Sections> sec = new ArrayList<Sections>();
+					sec = this.dao.getSectionBoard(s);
+					if( sec==null) {
+						throw new NullPointerException("pas de section lié à ce tableau");
+					}
+					return sec;
+				}
+				
 				@DELETE
 				@Path("delete/{s}")
 				public void deleteSection(@PathParam("s") Long s) {
@@ -60,12 +72,12 @@ public class SectionsResource {
 				
 				@PUT
 				@Consumes("application/json")
-				  public Response UpdateUser ( Sections s) {
+				  public Sections UpdateUser ( Sections s) {
 					if(s == null) {
 						throw new IllegalArgumentException("la section est nulle");
 					}
-					  this.dao.update(s);
+					  
 				    
-				    return Response.ok().entity("SUCCESS").build();
+				    return this.dao.update(s);
 				  }
 }

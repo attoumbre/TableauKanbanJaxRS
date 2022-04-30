@@ -53,7 +53,7 @@ public class Tableau implements Serializable{
 		this.nom = nom;
 	}
 	
-	@OneToMany(mappedBy = "tableau", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy = "tableau", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JsonManagedReference(value = "tableau")
 	public List<Sections> getSection() {
 		return sections;

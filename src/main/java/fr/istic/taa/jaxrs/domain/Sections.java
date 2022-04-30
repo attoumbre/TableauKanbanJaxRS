@@ -66,7 +66,7 @@ public class Sections implements Serializable{
 		this.lib = lib;
 	}
 	
-	@OneToMany(mappedBy = "section", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy = "section", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	 @JsonManagedReference(value = "section")
 	public List<Fiches> getFiches() {
 		return fiches;
