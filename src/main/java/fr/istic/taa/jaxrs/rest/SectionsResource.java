@@ -24,60 +24,64 @@ import fr.istic.taa.jaxrs.domain.Tags;
 public class SectionsResource {
 
 
-				private SectionsDao dao = new SectionsDao();
-				
-				@GET
-				@Path("/{s}")
-				public Sections getFicheById(@PathParam("s") Long s) {
-					if(s == null) {
-						throw new IllegalArgumentException("l'id de la section ne peut pas etre null");
-					}
-					return this.dao.findOne(s);
-				}
-				
-				@GET
-				@Path("/recup/{s}")
-				public List<Sections> getSectionLieBoard(@PathParam("s") Long s) {
-					List<Sections> sec = new ArrayList<Sections>();
-					sec = this.dao.getSectionBoard(s);
-					if( sec==null) {
-						throw new NullPointerException("pas de section lié à ce tableau");
-					}
-					return sec;
-				}
-				
-				@DELETE
-				@Path("delete/{s}")
-				public void deleteSection(@PathParam("s") Long s) {
-					this.dao.deleteById(s);
-				}
-				
-				@GET
-				@Path("/all")
-				public List<Sections> getAllSection() {
+		private SectionsDao dao = new SectionsDao();
+		
+		@GET
+		@Path("/{s}")
+		public Sections getFicheById(@PathParam("s") Long s) {
+			if(s == null) {
+				throw new IllegalArgumentException("l'id de la section ne peut pas etre null");
+			}
+			return this.dao.findOne(s);
+		}
+		
+		@GET
+		@Path("/recup/{s}")
+		public List<Sections> getSectionLieBoard(@PathParam("s") Long s) {
+			List<Sections> sec = new ArrayList<Sections>();
+			sec = this.dao.getSectionBoard(s);
+			if( sec==null) {
+				throw new NullPointerException("pas de section lié à ce tableau");
+			}
+			return sec;
+		}
+		
+		@DELETE
+		@Path("delete/{s}")
+		public void deleteSection(@PathParam("s") Long s) {
+			this.dao.deleteById(s);
+		}
+		
+		@GET
+		@Path("/all")
+		public List<Sections> getAllSection() {
 
-					return this.dao.findAll();
-				}
+			return this.dao.findAll();
+		}
 
-				@Path("/create")
-				@POST
-				@Consumes("application/json")
-				public void AddSection(Sections s) {
-					
-					if(s == null) {
-						throw new IllegalArgumentException("la section est nulle");
-					}
-					this.dao.save(s);
-				}
-				
-				@PUT
-				@Consumes("application/json")
-				  public Sections UpdateUser ( Sections s) {
-					if(s == null) {
-						throw new IllegalArgumentException("la section est nulle");
-					}
-					  
-				    
-				    return this.dao.update(s);
-				  }
+		@Path("/create")
+		@POST
+		@Consumes("application/json")
+		public void AddSection(Sections s) {
+			
+			if(s == null) {
+				throw new IllegalArgumentException("la section est nulle");
+			}
+			this.dao.save(s);
+		}
+		
+		@PUT
+		@Consumes("application/json")
+		  public Sections UpdateUser ( Sections s) {
+			if(s == null) {
+				throw new IllegalArgumentException("la section est nulle");
+			}
+			Sections sec = new Sections();
+		    sec = dao.findOne(s.getId());
+		    if( sec!= null) {
+		    	sec.setLib(s.getLib());
+		    	sec.setTableau(s.getTableau());
+		    }
+		    return this.dao.update(sec);
+		  }
 }
