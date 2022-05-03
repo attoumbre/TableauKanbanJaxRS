@@ -1,148 +1,118 @@
-## JaxRS + openAPI
+<div align="center" id="top"> 
+  <img src="./.github/app.gif" alt="Backend Dashboard" />
 
-1. Import this project in your IDE, 
-2. Start the database
-3. Start the database viewer
-4. Start the backend. There is a main class to start the backend
+  &#xa0;
+
+  <!-- <a href="https://exogen.netlify.app">Demo</a> -->
+</div>
+
+<h1 align="center">Backend Dashboard</h1>
+
+<p align="center">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/attoumbre/TableauKanbanJaxRS?color=56BEB8">
+
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/attoumbre/TableauKanbanJaxRS?color=56BEB8">
+
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/attoumbre/TableauKanbanJaxRS?color=56BEB8">
+
+  <img alt="License" src="https://img.shields.io/github/license/attoumbre/TableauKanbanJaxRS?color=56BEB8">
+
+  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/{{YOUR_GITHUB_USERNAME}}/exogen?color=56BEB8" /> -->
+
+  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/{{YOUR_GITHUB_USERNAME}}/exogen?color=56BEB8" /> -->
+
+  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/{{YOUR_GITHUB_USERNAME}}/exogen?color=56BEB8" /> -->
+</p>
+
+<!-- Status -->
+
+<!-- <h4 align="center"> 
+	🚧  Exogen 🚀 Under construction...  🚧
+</h4> 
+
+<hr> -->
+
+<p align="center">
+  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
+  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
+  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
+  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
+  <a href="#memo-license">License</a> &#xa0; | &#xa0;
+  <a href="https://github.com/attoumbre" target="_blank">Author</a>
+</p>
+
+<br>
+
+## About ##
+Création d'une api rest de gestion de tableau kanban
+
+## Technologies ##
+
+Les outils suivants ont été utilisés dans le cadre de ce projet:
+
+- La **base de données** utilisée est **MySQL**.
+
+- [Java](https://www.oracle.com/fr/java/)
+- [JaxRs](https://www.oracle.com/technical-resources/articles/java/jax-rs.html)
+- [JPA](https://www.oracle.com/technical-resources/articles/java/jpa.html)
 
 
+## Pré-requis ##
 
+- Version du jdk : Ce projet a été testé avec la version **17 du JDK (Java JDK 17)**. Certains réglages mineurs
+  pourraient s'avérés nécessaires pour la compatibilité avec des versions antérieures du JDK.
 
-# Task Open API Integration 
+## Versions
 
-Now, we would like to ensure that our API can be discovered. The OpenAPI Initiative (OAI) was created by a consortium of forward-looking industry experts who recognize the immense value of standardizing on how REST APIs are described. As an open governance structure under the Linux Foundation, the OAI is focused on creating, evolving and promoting a vendor neutral description format. 
+**Dernière version stable :** Sur la branche **Master**
 
-APIs form the connecting glue between modern applications. Nearly every application uses APIs to connect with corporate data sources, third party data services or other applications. Creating an open description format for API services that is vendor neutral, portable and open is critical to accelerating the vision of a truly connected world.
+## Démarrage
 
-To do this integration first, I already add a dependencies to openAPI libraries. 
+- Pour lancer le serveur :
+  Exécuter le fichier **RestServer** se trouvant à la racine du package _**java**_ du projet.
+  The server est initialisé sur <http://localhost:8080>
 
-```xml
-			<dependency>
-			<groupId>io.swagger.core.v3</groupId>
-			<artifactId>swagger-jaxrs2</artifactId>
-			<version>2.1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>io.swagger.core.v3</groupId>
-			<artifactId>swagger-jaxrs2-servlet-initializer-v2</artifactId>
-			<version>2.1.4</version>
-		</dependency>
+## Test
+
+* Le projet peut être testé, en local, via **Swagger** (Cliquer **[ICI](http://localhost:8080/api/)** après avoir lancé
+  le server en local).
+
+## Postman
+Ajout d'un utilisateur: (URL) http://localhost:8080/user/signup
+
 ```
+Body
+{
+    "nom" : "juvenal",
+    "email" : "aaa@fr"
+}
+```
+Ajout d'une fiche sur une section d'un utilisateur : (URL) http://localhost:8080/fiches/create
 
-Next you have to add OpenAPI Resource to your application
-
-Your application could be something like that. 
-
-```java
-@ApplicationPath("/")
-public class RestApplication extends Application {
-
-	@Override
-	public Set<Class<?>> getClasses() {
-		final Set<Class<?>> resources = new HashSet<>();
-
-
-		// SWAGGER endpoints
-		resources.add(OpenApiResource.class);
-
-        //Your own resources. 
-        resources.add(PersonResource.class);
-....
-		return resources;
-	}
+```
+Body
+{
+"description": "gestion logOut", 
+"section": {
+    "id" : "3"
+    }, 
+"user": {
+    "id" :"1" 
+    }, 
+"date": "06-05-2022T00:00:00", 
+"temps": "10"
 }
 ```
 
-Next start your server, you must have your api description available at [http://localhost:8080/openapi.json](http://localhost:8080/openapi.json)
+... Veuillez vous référer au swagger pour avoir le format Json des différent endpoints.
 
-### Integrate Swagger UI. 
+## Licence ##
+Ce projet est sous licence MIT. Pour plus de détails, voir le fichier [LICENSE](LICENSE.md).
 
-Next we have to integrate Swagger UI. We will first download it.
-https://github.com/swagger-api/swagger-ui
+## Auteurs ##
+Fais avec :heart: par <a href="https://github.com/attoumbre" target="_blank">Juvenal ATTOUMBRE && Nadège Yeo</a>
 
-Copy dist folder content in src/main/webapp/swagger in your project. 
+&#xa0;
 
-Edit index.html file to automatically load your openapi.json file. 
-
-At the end of the index.html, your must have something like that.
-
-```js
-   // Build a system
-      const ui = SwaggerUIBundle({
-        url: "http://localhost:8080/openapi.json",
-        dom_id: '#swagger-ui',
-        
-        ...
-```
-
-Next add a new resources to create a simple http server when your try to access to http://localhost:8080/api/.
-
-This new resources can be developped as follows
-
-```java
-package app.web.rest;
-
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.util.logging.Logger;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-
-@Path("/api")
-public class SwaggerResource {
-
-    private static final Logger logger = Logger.getLogger(SwaggerResource.class.getName());
-
-    @GET
-    public byte[] Get1() {
-        try {
-            return Files.readAllBytes(FileSystems.getDefault().getPath("src/main/webapp/swagger/index.html"));
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-    @GET
-    @Path("{path:.*}")
-    public byte[] Get(@PathParam("path") String path) {
-        try {
-            return Files.readAllBytes(FileSystems.getDefault().getPath("src/main/webapp/swagger/"+path));
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-}
-```
-
-Add this new resources in your application
-
-```java
-@ApplicationPath("/")
-public class RestApplication extends Application {
-
-
-	@Override
-	public Set<Class<?>> getClasses() {
-		final Set<Class<?>> resources = new HashSet<>();
-
-
-		// SWAGGER endpoints
-		resources.add(OpenApiResource.class);
-		resources.add(PersonResource.class);
-        //NEW LINE TO ADD
-		resources.add(SwaggerResource.class);
-
-		return resources;
-	}
-}
-```
-
-Restart your server and access to http://localhost:8080/api/, you should access to a swagger ui instance that provides documentation on your api. 
-
-You can follow this guide to show how you can specialise the documentation through annotations.
-
-https://github.com/swagger-api/swagger-samples/blob/2.0/java/java-resteasy-appclasses/src/main/java/io/swagger/sample/resource/PetResource.java
+<a href="#top">Back to top</a>
