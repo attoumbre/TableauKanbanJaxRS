@@ -90,4 +90,23 @@ public class FicheResource {
 				 return this.dao.update(fiches);
 
 			  }
+			
+			@PUT
+			@Path("/update")
+			@Consumes("application/json")
+			public Fiches modif(Fiches f) {
+				if (f == null) {
+					throw new IllegalArgumentException("la fiche est nulle.");
+				}
+				
+				Fiches fiches = this.dao.findOne(f.getId());
+				if (fiches != null ) {
+					fiches.setDate(f.getDate());
+					fiches.setDescription(f.getDescription());
+					fiches.setTemps(f.getTemps());
+					
+				}
+				return this.dao.update(fiches);
+			}
+			
 }
