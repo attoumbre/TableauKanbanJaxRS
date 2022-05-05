@@ -12,7 +12,7 @@ public class SectionsDao extends AbstractJpaDao<Long, Sections>{
 	
 	public List<Sections> getSectionBoard(long id) {
 		
-		String query = "select s from Sections as s inner join Tableau as t on s.tableau.id = t.id where t.id =:tableau ";
+		String query = "select s from Sections as s join Tableau as t on s.tableau.id = t.id where t.id =:tableau ";
 		return (List<Sections>)  EntityManagerHelper.getEntityManager().createQuery(query, Sections.class)
 				.setParameter("tableau", id).getResultList();
 	}
